@@ -100,6 +100,11 @@
 
         <div class="project-grid">
           <article class="project-card featured">
+            <figure class="project-shot">
+              <img src="assents/life.png" alt="Tela do dashboard do Life Finance" loading="lazy">
+
+              <figcaption>Life Finance - dashboard financeiro</figcaption>
+            </figure>
             <div class="project-tag-row">
               <span class="tag">Django</span>
               <span class="tag">PostgreSQL</span>
@@ -122,6 +127,11 @@
           </article>
 
           <article class="project-card featured">
+            <figure class="project-shot">
+              <img src="assents/Edunex.png" alt="Tela do dashboard do Edunex" loading="lazy">
+
+              <figcaption>Edunex - painel de gestão escolar</figcaption>
+            </figure>
             <div class="project-tag-row">
               <span class="tag">Django</span>
               <span class="tag">JavaScript</span>
@@ -145,6 +155,12 @@
           </article>
 
           <article class="project-card featured">
+            <figure class="project-shot">
+              <div class="project-shot-placeholder">
+                <span>Print do projeto</span>
+              </div>
+              <figcaption>Vittas - gestão de clínicas</figcaption>
+            </figure>
             <div class="project-tag-row">
               <span class="tag">Django</span>
               <span class="tag">PostgreSQL</span>
@@ -271,6 +287,50 @@
       </section>
     </main>
   </div>
+
+  <dialog class="image-viewer" id="image-viewer" aria-label="Visualização ampliada do projeto">
+    <button class="image-viewer-close" type="button" aria-label="Fechar visualização">×</button>
+    <img src="" alt="">
+    <p></p>
+  </dialog>
+
+  <script>
+    const imageViewer = document.querySelector("#image-viewer");
+    const imageViewerImg = imageViewer.querySelector("img");
+    const imageViewerCaption = imageViewer.querySelector("p");
+    const imageViewerClose = imageViewer.querySelector(".image-viewer-close");
+
+    document.querySelectorAll(".project-shot").forEach((shot) => {
+      const image = shot.querySelector("img");
+
+      if (!image) return;
+
+      shot.classList.add("project-shot-clickable");
+      shot.setAttribute("tabindex", "0");
+      shot.setAttribute("role", "button");
+      shot.setAttribute("aria-label", `Ampliar imagem: ${image.alt}`);
+
+      const openViewer = () => {
+        imageViewerImg.src = image.dataset.full || image.src;
+        imageViewerImg.alt = image.alt;
+        imageViewerCaption.textContent = shot.querySelector("figcaption")?.textContent || image.alt;
+        imageViewer.showModal();
+      };
+
+      shot.addEventListener("click", openViewer);
+      shot.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openViewer();
+        }
+      });
+    });
+
+    imageViewerClose.addEventListener("click", () => imageViewer.close());
+    imageViewer.addEventListener("click", (event) => {
+      if (event.target === imageViewer) imageViewer.close();
+    });
+  </script>
 </body>
 
 </html>
