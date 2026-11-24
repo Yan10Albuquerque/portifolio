@@ -789,17 +789,15 @@ li {
     gap: 10px;
   }
 
-  /* No celular, mantém só o WhatsApp flutuante para não cobrir o conteúdo;
-     LinkedIn e GitHub continuam na seção de contato. */
-  .floating-social-linkedin,
-  .floating-social-github {
-    display: none;
+  .floating-social {
+    width: 44px;
+    height: 44px;
+    font-size: 0.8rem;
   }
 
-  .floating-social {
-    width: 48px;
-    height: 48px;
-    font-size: 0.8rem;
+  .floating-social svg {
+    width: 22px;
+    height: 22px;
   }
 
   .image-viewer {
